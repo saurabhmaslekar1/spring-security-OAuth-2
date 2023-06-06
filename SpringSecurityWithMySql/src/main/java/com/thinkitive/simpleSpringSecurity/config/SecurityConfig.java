@@ -11,12 +11,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-//@Configuration
+@Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+//    @Autowired
+//    private UserDetailsService userDetailsService;
 //    @Bean
 //    public AuthenticationProvider authProvider(){
 //        DaoAuthenticationProvider provider=new DaoAuthenticationProvider();
@@ -25,14 +25,14 @@ public class SecurityConfig {
 //        return provider;
 //    }
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-//        http
-//                .csrf().disable()
-//                .authorizeRequests().antMatchers("/login").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .httpBasic();
-//        return http.build();
-//    }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        http
+                .csrf().disable()
+                .authorizeRequests().antMatchers("/login").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .oauth2Login();
+        return http.build();
+    }
 }
